@@ -7,8 +7,6 @@
     ╚══════════════════════════════════════════════════════════════════════════════╝
 ]]
 
---test
-
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
@@ -42,27 +40,27 @@ local Config = {
     Brand = "Echo",
     Developer = "randomahhdev",
     Theme = {
-        Background = Color3.fromRGB(14, 14, 18),
-        BackgroundSecondary = Color3.fromRGB(24, 24, 32),
-        BackgroundTertiary = Color3.fromRGB(34, 34, 44),
-        Accent = Color3.fromRGB(138, 92, 255),
-        AccentHover = Color3.fromRGB(160, 115, 255),
-        AccentDark = Color3.fromRGB(100, 65, 200),
-        Text = Color3.fromRGB(245, 245, 250),
-        TextDim = Color3.fromRGB(140, 140, 155),
-        TextDark = Color3.fromRGB(100, 100, 115),
-        Border = Color3.fromRGB(40, 40, 52),
-        BorderHover = Color3.fromRGB(55, 55, 70),
-        Success = Color3.fromRGB(85, 230, 130),
-        Error = Color3.fromRGB(235, 85, 85),
-        Warning = Color3.fromRGB(255, 190, 70),
-        Info = Color3.fromRGB(90, 170, 255),
-        Purple = Color3.fromRGB(138, 92, 255),
-        Red = Color3.fromRGB(235, 85, 85),
-        Green = Color3.fromRGB(85, 230, 130),
-        Blue = Color3.fromRGB(90, 170, 255),
-        Orange = Color3.fromRGB(255, 160, 60),
-        Yellow = Color3.fromRGB(255, 220, 80)
+        Background = Color3.fromRGB(8, 8, 8),
+        BackgroundSecondary = Color3.fromRGB(14, 14, 14),
+        BackgroundTertiary = Color3.fromRGB(20, 20, 20),
+        Accent = Color3.fromRGB(220, 50, 50),
+        AccentHover = Color3.fromRGB(255, 70, 70),
+        AccentDark = Color3.fromRGB(160, 30, 30),
+        Text = Color3.fromRGB(255, 255, 255),
+        TextDim = Color3.fromRGB(160, 160, 160),
+        TextDark = Color3.fromRGB(90, 90, 90),
+        Border = Color3.fromRGB(30, 30, 30),
+        BorderHover = Color3.fromRGB(50, 50, 50),
+        Success = Color3.fromRGB(80, 200, 100),
+        Error = Color3.fromRGB(220, 50, 50),
+        Warning = Color3.fromRGB(220, 160, 40),
+        Info = Color3.fromRGB(80, 140, 220),
+        Purple = Color3.fromRGB(140, 80, 220),
+        Red = Color3.fromRGB(220, 50, 50),
+        Green = Color3.fromRGB(80, 200, 100),
+        Blue = Color3.fromRGB(80, 140, 220),
+        Orange = Color3.fromRGB(220, 130, 40),
+        Yellow = Color3.fromRGB(220, 190, 50)
     },
     Animation = {
         Instant = TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
@@ -263,7 +261,7 @@ function UI:Build()
         Visible = false
     })
 
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 12), Parent = self.MainFrame})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.MainFrame})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1.5, Parent = self.MainFrame})
 
     -- Shadow
@@ -289,7 +287,7 @@ function UI:Build()
         BorderSizePixel = 0,
         Size = UDim2.new(1, 0, 0, 45)
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 12), Parent = self.TitleBar})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.TitleBar})
 
     -- Title Text
     Utility:Create("TextLabel", {
@@ -371,7 +369,7 @@ function UI:Build()
         Size = UDim2.new(0, 45, 0, 45),
         Image = Players:GetUserThumbnailAsync(LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = self.AvatarImage})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.AvatarImage})
     Utility:Create("UIStroke", {Color = Config.Theme.Accent, Thickness = 2, Parent = self.AvatarImage})
 
     Utility:Create("TextLabel", {
@@ -401,11 +399,17 @@ function UI:Build()
     })
 
     -- Tab Container
-    self.TabContainer = Utility:Create("Frame", {
+    self.TabContainer = Utility:Create("ScrollingFrame", {
         Parent = self.Sidebar,
         BackgroundTransparency = 1,
+        BorderSizePixel = 0,
         Position = UDim2.new(0, 0, 0, 85),
-        Size = UDim2.new(1, 0, 1, -145)
+        Size = UDim2.new(1, 0, 1, -145),
+        ScrollBarThickness = 2,
+        ScrollBarImageColor3 = Config.Theme.Accent,
+        CanvasSize = UDim2.new(0, 0, 0, 0),
+        AutomaticCanvasSize = Enum.AutomaticSize.Y,
+        ScrollingDirection = Enum.ScrollingDirection.Y
     })
 
     Utility:Create("UIListLayout", {
@@ -446,7 +450,7 @@ function UI:Build()
         TextSize = 13,
         ClearTextOnFocus = false
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = self.CommandInput})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.CommandInput})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1, Parent = self.CommandInput})
 
     -- Content Area
@@ -504,7 +508,7 @@ function UI:Build()
         Visible = true,
         ZIndex = 50
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = self.ToggleBtn})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.ToggleBtn})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 2, Parent = self.ToggleBtn})
 
     -- Glow effect for toggle
@@ -717,7 +721,7 @@ function UI:ShowNotification(title, message, duration, color)
         ClipsDescendants = true,
         ZIndex = 100
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = notif})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = notif})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1, Parent = notif})
 
     local indicator = Utility:Create("Frame", {
@@ -727,7 +731,7 @@ function UI:ShowNotification(title, message, duration, color)
         Position = UDim2.new(0, 0, 0, 0),
         Size = UDim2.new(0, 4, 1, 0)
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = indicator})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = indicator})
 
     local titleLabel = Utility:Create("TextLabel", {
         Parent = notif,
@@ -917,7 +921,7 @@ function UI:PopulateDashboard()
             TextColor3 = Config.Theme.Text,
             TextSize = 13
         })
-        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = btn})
+        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = btn})
         btn.MouseButton1Click:Connect(function()
             Echo.Commands:Process(action[2])
         end)
@@ -937,7 +941,7 @@ function UI:CreateCard(parent, size)
         BorderSizePixel = 0,
         Size = size or UDim2.new(1, 0, 0, 100)
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 10), Parent = card})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = card})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1, Parent = card})
     return card
 end
@@ -957,7 +961,7 @@ function UI:PopulateCommandsPage()
         PlaceholderColor3 = Config.Theme.TextDark,
         TextSize = 14
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = searchBox})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = searchBox})
     Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1, Parent = searchBox})
 
     local commandList = Utility:Create("Frame", {
@@ -986,7 +990,7 @@ function UI:PopulateCommandsPage()
             BorderSizePixel = 0,
             Size = UDim2.new(1, 0, 0, 50)
         })
-        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = row})
+        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = row})
 
         local nameLabel = Utility:Create("TextLabel", {
             Parent = row,
@@ -1082,7 +1086,7 @@ function UI:PopulatePlayersPage()
                 BorderSizePixel = 0,
                 Size = UDim2.new(1, 0, 0, 60)
             })
-            Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = row})
+            Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = row})
 
             local avatar = Utility:Create("ImageLabel", {
                 Parent = row,
@@ -1092,7 +1096,7 @@ function UI:PopulatePlayersPage()
                 Size = UDim2.new(0, 44, 0, 44),
                 Image = Players:GetUserThumbnailAsync(player.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size48x48)
             })
-            Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = avatar})
+            Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = avatar})
 
             local nameLabel = Utility:Create("TextLabel", {
                 Parent = row,
@@ -1131,7 +1135,7 @@ function UI:PopulatePlayersPage()
                     TextColor3 = Config.Theme.Text,
                     TextSize = 11
                 })
-                Utility:Create("UICorner", {CornerRadius = UDim.new(0, 4), Parent = btn})
+                Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = btn})
 
                 local cmds = {Goto = "goto", Bring = "bring", Kill = "kill", Spectate = "spectate"}
                 btn.MouseButton1Click:Connect(function()
@@ -1264,7 +1268,7 @@ function UI:PopulateServerPage()
                     TextColor3 = Config.Theme.Text,
                     TextSize = 13
                 })
-                Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = btn})
+                Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = btn})
                 btn.MouseButton1Click:Connect(btnData[2])
                 btn.MouseEnter:Connect(function()
                     Utility:Tween(btn, {BackgroundColor3 = Config.Theme.AccentHover}, Config.Animation.Fast)
@@ -1341,7 +1345,7 @@ function UI:PopulateVisualsPage()
             Position = UDim2.new(1, -60, 0, 20),
             Size = UDim2.new(0, 50, 0, 28)
         })
-        Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = toggleBtn})
+        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = toggleBtn})
 
         local toggleKnob = Utility:Create("Frame", {
             Parent = toggleBtn,
@@ -1350,7 +1354,7 @@ function UI:PopulateVisualsPage()
             Position = UDim2.new(0, 3, 0.5, -11),
             Size = UDim2.new(0, 22, 0, 22)
         })
-        Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = toggleKnob})
+        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = toggleKnob})
 
         local enabled = Echo.Features[toggleData[3]] or false
         if enabled then
@@ -1428,7 +1432,7 @@ function UI:PopulateSettingsPage()
             TextColor3 = Config.Theme.Text,
             TextSize = 13
         })
-        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = input})
+        Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = input})
         Utility:Create("UIStroke", {Color = Config.Theme.Border, Thickness = 1, Parent = input})
 
         input.FocusLost:Connect(function()
@@ -1458,7 +1462,7 @@ function UI:PopulateSettingsPage()
         TextColor3 = Config.Theme.Text,
         TextSize = 14
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = resetBtn})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = resetBtn})
 
     resetBtn.MouseButton1Click:Connect(function()
         Config.Prefix = ";"
@@ -1479,7 +1483,7 @@ function UI:PopulateConsolePage()
         ScrollBarImageColor3 = Config.Theme.Accent,
         AutomaticCanvasSize = Enum.AutomaticSize.Y
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 10), Parent = self.ConsoleContent})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = self.ConsoleContent})
 
     Utility:Create("UIPadding", {
         Parent = self.ConsoleContent,
@@ -1506,7 +1510,7 @@ function UI:PopulateConsolePage()
         TextColor3 = Config.Theme.Text,
         TextSize = 14
     })
-    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 8), Parent = clearBtn})
+    Utility:Create("UICorner", {CornerRadius = UDim.new(0, 0), Parent = clearBtn})
 
     clearBtn.MouseButton1Click:Connect(function()
         for _, child in ipairs(self.ConsoleContent:GetChildren()) do
@@ -1516,7 +1520,7 @@ function UI:PopulateConsolePage()
 end
 
 --// Features System
-local Features = {}
+Features = {}
 Features.ESP = false
 Features.Fullbright = false
 Features.Tracers = false
@@ -1864,7 +1868,7 @@ function Features:DisableInvisible()
 end
 
 --// Command System
-local Commands = {}
+Commands = {}
 Commands.List = {}
 Commands.Aliases = {}
 Commands.Count = 0
@@ -4950,6 +4954,8 @@ end)
 
 
 --// Initialize
+Echo.Commands = Commands
+Echo.Features = Features
 Echo.UI = UI.new()
 Utility:Log(Config.Brand .. " Admin v" .. Config.Version .. " initialized", "Success")
 Utility:Log("Developer: " .. Config.Developer, "Info")
