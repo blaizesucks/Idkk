@@ -7,6 +7,8 @@
     ╚══════════════════════════════════════════════════════════════════════════════╝
 ]]
 
+-- UI update
+
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
@@ -4945,6 +4947,8 @@ end)
 
 
 --// Initialize
+Echo.UI = UI.new()
+Echo.UI:Build()
 Utility:Log(Config.Brand .. " Admin v" .. Config.Version .. " initialized", "Success")
 Utility:Log("Developer: " .. Config.Developer, "Info")
 Utility:Log("Prefix: " .. Config.Prefix, "Info")
