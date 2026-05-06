@@ -7,7 +7,7 @@
     ╚══════════════════════════════════════════════════════════════════════════════╝
 ]]
 
--- UI update
+--test
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
@@ -501,7 +501,7 @@ function UI:Build()
         Text = "E",
         TextColor3 = Config.Theme.Text,
         TextSize = 24,
-        Visible = false,
+        Visible = true,
         ZIndex = 50
     })
     Utility:Create("UICorner", {CornerRadius = UDim.new(1, 0), Parent = self.ToggleBtn})
@@ -661,7 +661,10 @@ end
 function UI:Show()
     self.MainFrame.Visible = true
     self.ToggleBtn.Visible = false
-    Utility:Tween(self.MainFrame, {Size = UDim2.new(0, 800, 0, 550), Position = UDim2.new(0.5, -400, 0.5, -275)}, Config.Animation.Bounce)
+    local vp = workspace.CurrentCamera.ViewportSize
+    local w = math.min(800, vp.X - 20)
+    local h = math.min(550, vp.Y - 20)
+    Utility:Tween(self.MainFrame, {Size = UDim2.new(0, w, 0, h), Position = UDim2.new(0.5, -w/2, 0.5, -h/2)}, Config.Animation.Bounce)
 end
 
 function UI:Hide()
@@ -4948,7 +4951,6 @@ end)
 
 --// Initialize
 Echo.UI = UI.new()
-Echo.UI:Build()
 Utility:Log(Config.Brand .. " Admin v" .. Config.Version .. " initialized", "Success")
 Utility:Log("Developer: " .. Config.Developer, "Info")
 Utility:Log("Prefix: " .. Config.Prefix, "Info")
